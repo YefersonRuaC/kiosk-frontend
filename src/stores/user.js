@@ -26,8 +26,9 @@ export const useUserStore = defineStore('user', () => {
             router.push({ name: 'login' })
 
         } catch (error) {
+            // console.log(error)
             toast.open({
-                message: error.response.data,
+                message: error.response.data.message,
                 type: 'error'
             })
         }

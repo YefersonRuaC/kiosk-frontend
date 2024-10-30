@@ -13,11 +13,6 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/modal',
-      name: 'modal',
-      component: () => import('@/views/ModalView.vue')
-    },
-    {
       path: '/auth',
       name: 'auth',
       component: () => import('@/views/auth/AuthLayout.vue'),
@@ -88,7 +83,6 @@ router.beforeEach( async(to, from, next) => {
 });
 
 router.beforeEach(async (to, from, next) => {
-  
   const requiresAdmin = to.matched.some(url => url.meta.requiresAdmin);
   const toast = inject('toast');
 

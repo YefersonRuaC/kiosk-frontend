@@ -12,7 +12,6 @@
     defineEmits(['open-modal']);
     
     const order = useOrdersStore();
-    const isEditing = ref(false);
 
     const closeModal = () => {
         isModal.value = false;

@@ -54,9 +54,11 @@ export const useOrdersStore = defineStore('orders', () => {
         // console.log(quantity.value);
     }
 
+    //Always that modal is open, check the product
     const changeProduct = (product) => {
         currentProduct.value = product;
         // console.log(product)
+        //Check if currentProduct already exists in order array
         const existsProduct = order.value.find(selectedProduct => selectedProduct.id === product.id);
         if (existsProduct) {
             quantity.value = existsProduct.quantity;
@@ -94,14 +96,16 @@ export const useOrdersStore = defineStore('orders', () => {
                 type: 'success'
             });
         }
-        quantity.value = 1;
+        quantity.value = 1;//Reset quantity state
         // console.log('ORDER', order.value)
     }
 
     const handleUpdateFromOrder = (id, newQuantity) => {
+        //Getting the product that is gonna be updated
         const productToUpdate = order.value.find(product => product.id === id);
         // console.log(productToUpdate)
         if(productToUpdate) {
+            //New quantity and subtotal of the updated product
             productToUpdate.quantity = newQuantity;
             productToUpdate.subTotal = productToUpdate.quantity * productToUpdate.price;
         }
@@ -112,6 +116,7 @@ export const useOrdersStore = defineStore('orders', () => {
     }
 
     const handleDeleteFromOrder = (id) => {
+        //New order array without the product selected
         const orderUpdated = order.value.filter(product => product.id !== id);
         order.value = orderUpdated;
         toast.open({
@@ -122,8 +127,8 @@ export const useOrdersStore = defineStore('orders', () => {
 
     async function handleSubmitCreateOrder() {
         const payload = {
-            total: total.value,
-            products: order.value.map(product => {
+            total: total.value,//Order total
+            products: order.value.map(product => {//Order array with id and quantity of each product
                 return {
                     id: product.id,
                     quantity: product.quantity

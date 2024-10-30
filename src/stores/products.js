@@ -37,12 +37,14 @@ export const useProductsStore = defineStore('products', () => {
             // console.log(data.product.available)
 
             if(data.product.available) {
+                //unavailableProducts is called to update the unavailable products array (view in real time)
                 unavailableProducts();
                 toast.open({
                     message: 'Product put into stock',
                     type: 'info'
                 });
             } else {
+                //fetchProducts is called to update the available products array
                 fetchProducts();
                 toast.open({
                     message: 'Product taken out of stock',
